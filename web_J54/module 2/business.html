@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business</title>
+    <link rel="shortcut icon" href="./img/FIBEX_logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="./bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <svg class="fixedBottom" height="400" width="650">
+        <polygon points="0,0 0,400 650,400 100,300" style="fill:#4a6783;"></polygon>
+    </svg>
+    <svg class="fixedTop" height="400" width="650">
+        <polygon points="0,0 650,0 650,400 550,100" style="fill:#4a6783;"></polygon>
+    </svg>
+
+    <!-- navbar -->
+
+    <nav class="container">
+        <img src="./img/FIBEX_logo.png" style="height: 4vh; margin: 2vh 2vw; transform: scale(2);" alt="logo">
+        <a href="./home.html">Home</a>
+        <a href="./news.html">News</a>
+        <a href="./business.html" class="nowNav">Business</a>
+        <a href="./tickets.html">Tickets</a>
+        <a href="./tablesheet.php">TableSheet</a>
+    </nav>
+
+    <!-- collapse -->
+
+    <main>
+
+        <div class="container mt-5">
+
+            <div class="businessCard">
+
+                <div class="imgBack">
+                    <img class="img1" src="./img/News2.jpg" alt="">
+                    <img class="img2" src="./img/News5.jpg" alt="">
+                </div>
+
+                <div class="content text-center" style="float: right;">
+                    <h1 style="font-weight: 800; border-style: hidden hidden solid solid;">設計展資訊區</h1>
+                    <div style="font-weight: 600;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Unde,aspernatur accusantium aliquid cupiditate numquam nihil, sapiente incidunt dolore neque id
+                        enim ad est nobis magnam et cumque minima cum? Ad?</div>
+                </div>
+
+                <div class="imgFront" style="margin-left: 35px;">
+                    <img class="img1" src="./img/News2.jpg" alt="" style="margin-left: -35px;">
+                    <img class="img2" src="./img/News5.jpg" alt="" style="margin-left: -35px;">
+                </div>
+
+                <div class="squareLeft"></div>
+
+            </div>
+
+
+
+            <div class="businessCard ml-auto mt-5">
+
+                <div class="imgBack">
+                    <img class="img1" src="./img/News4.jpg" alt="">
+                    <img class="img2" src="./img/Park.jpg" alt="">
+                </div>
+
+                <div class="content text-center">
+                    <h1 style="font-weight: 800; border-style: hidden solid solid hidden;">作品介紹區</h1>
+                    <div style="font-weight: 600;">Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                        Nisilaudantiumarchitecto facere rerum excepturi harum, est quidem iure cupiditate quibusdam
+                        ree.Laboriosam.</div>
+                    <div id="readMore" style="font-weight: 600; display: none;">Lorem ipsum dolor sit amet consectetur
+                        adipisicing elit. Sunt sequi harum laudantium, asperiores magnam doloribus mollitia, cumque,
+                        dolore isquam.</div>
+                    <button class="btn rootBtn m-2" style="width: 8em;">Read more</button>
+                </div>
+
+                <div class="imgFront">
+                    <img class="img1" src="./img/News4.jpg" alt="" style="margin-left: -420px;">
+                    <img class="img2" src="./img/Park.jpg" alt="" style="margin-left: -420px;">
+                </div>
+
+                <div class="squareRight"></div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- footer -->
+
+    <footer class="text-center text-white p-2" style="background-color: #4a6783;">
+        <img src="./img/facebook.png" style="height: 40px;" alt="facebook">
+        <span>Copyright &copy; 2024 FIBEX All Rights Reserved</span>
+        <img src="./img/google.png" style="height: 40px;" alt="google">
+    </footer>
+
+    <!-- script -->
+
+    <script src="./jquery/jquery.js"></script>
+    <script src="./bootstrap/bootstrap.js"></script>
+    <script>
+
+        $("a[href='./business.html']").hover(
+            function () {
+                $(this).css("animation-name", "lnowNav")
+            },
+            function () {
+                $(this).css("animation-name", "nowNav")
+            }
+        )
+
+        $(".btn").click(function () {
+            $("#readMore").slideToggle(500)
+            $(this).text() == "Read more" ? $(this).text("Read less") : $(this).text("Read more")
+        })
+
+        let count = 0
+
+        function init() {
+            if (count % 2) {
+                $(".img1").removeClass("imgEscalate").css("display", "none")
+                $(".img2").addClass("imgEscalate").css("display", "flex")
+                $(".img2:even").animate({ "opacity": ".2" })
+                $(".img2:odd").animate({ "opacity": "1" })
+                setTimeout(() => {
+                    $(".img2").css("opacity", "0")
+                }, 9500)
+            } else {
+                $(".img2").removeClass("imgEscalate").css("display", "none")
+                $(".img1").addClass("imgEscalate").css("display", "flex")
+                $(".img1:even").animate({ "opacity": ".2" })
+                $(".img1:odd").animate({ "opacity": "1" })
+                setTimeout(() => {
+                    $(".img1").css("opacity", "0")
+                }, 9500)
+            }
+            count++
+        }
+
+        init()
+        setInterval(init, 10000)
+
+    </script>
+
+</body>
+
+</html>

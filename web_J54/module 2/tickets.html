@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tickets</title>
+    <link rel="shortcut icon" href="./img/FIBEX_logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="./bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="ticketDisplay text-success">
+        <h1 class="display-1" style="font-weight: 900;">資料送出中...</h1>
+    </div>
+    <div class="ticketAnimationLeft"></div>
+    <div class="ticketAnimationRight"></div>
+
+    <svg class="fixedBottom" height="400" width="650">
+        <polygon points="0,0 0,400 650,400 100,300" style="fill:#4a6783;"></polygon>
+    </svg>
+    <svg class="fixedTop" height="400" width="650">
+        <polygon points="0,0 650,0 650,400 550,100" style="fill:#4a6783 ;"></polygon>
+    </svg>
+
+    <!-- navbar -->
+
+    <nav class="container">
+        <img src="./img/FIBEX_logo.png" style="height: 4vh; margin: 2vh 2vw; transform: scale(2);" alt="logo">
+        <a href="./home.html">Home</a>
+        <a href="./news.html">News</a>
+        <a href="./business.html">Business</a>
+        <a href="./tickets.html" class="nowNav">Tickets</a>
+        <a href="./tablesheet.php">TableSheet</a>
+    </nav>
+
+    <!-- ticketform -->
+
+    <div id="alert" style="position: fixed; top: 1em; right: 1em; font-weight: 900;"></div>
+
+    <main>
+
+        <div class="container mt-5" style="width: 50vw;">
+
+            <form action="./api/new.php" method="post" class="p-5 shadow" novalidate>
+
+                <h1 class="text-center mt-4">TICKETS</h1>
+
+                <div class="form-row mt-4">
+                    <div class="col">
+                        <input type="text" class="form-control" name="fname" placeholder="First name (名字)" required>
+                        <div class="invalid-tooltip" style="opacity: .5;">Please provide your first name.</div>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" name="lname" placeholder="Last name (姓氏)" required>
+                        <div class="invalid-tooltip" style="opacity: .5;">Please provide your last name.</div>
+                    </div>
+                </div>
+
+                <div class="form-row mt-5">
+                    <div class="col">
+                        <input type="tel" class="form-control" name="phone" placeholder="Phone (手機號碼)" required>
+                        <div class="invalid-tooltip" style="opacity: .5;">Please provide your phone number.</div>
+                    </div>
+                    <div class="col">
+                        <input type="password" class="form-control" name="pw" placeholder="Password (會員密碼)" required>
+                        <div class="invalid-tooltip" style="opacity: .5;">Please provide your password.</div>
+                    </div>
+                </div>
+
+                <div class="form-row mt-5 align-items-center">
+                    <div class="col-6">
+                        <input type="text" class="form-control" name="veri" placeholder="Verification (數字驗證)" required>
+                        <div class="invalid-tooltip" style="opacity: .5;">Please provide the verification</div>
+                    </div>
+                    <span id="captcha" class="col-2 text-center mx-auto"></span>
+                    <button type="button" class="btn rootBtn col-3" onclick="reGenerate()" style="height: 5vh;">Refresh
+                        (重刷驗證碼)</button>
+                </div>
+
+                <hr>
+
+                <div class="form-row mt-4">
+                    <button type="reset" class="btn rootBtn col-10 mx-auto" style="height: 5vh;">Reset (重製表單)</button>
+                </div>
+
+                <div class="form-row mt-4">
+                    <button type="button" class="btn rootBtn col-10 mx-auto" style="height: 5vh;"
+                        onclick="formSubmit()">Submit (送出按鈕)</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+    <!-- footer -->
+
+    <footer class="text-center text-white p-2" style="background-color: #4a6783;">
+        <img src="./img/facebook.png" style="height: 40px;" alt="facebook">
+        <span>Copyright &copy; 2024 FIBEX All Rights Reserved</span>
+        <img src="./img/google.png" style="height: 40px;" alt="google">
+    </footer>
+
+    <!-- script -->
+
+    <script src="./jquery/jquery.js"></script>
+    <script src="./bootstrap/bootstrap.js"></script>
+    <script>
+
+        $("a[href='./tickets.html']").hover(
+            function () {
+                $(this).css("animation-name", "lnowNav")
+            },
+            function () {
+                $(this).css("animation-name", "nowNav")
+            }
+        )
+
+        function reGenerate() {
+            let randomNum = Math.floor(Math.random() * 8999 + 1000)
+            $("#captcha").text(randomNum)
+        }
+        reGenerate()
+
+        function formSubmit() {
+            if ($("input[name='veri']").val() == $("#captcha").text()) {
+                if ($("form")[0].reportValidity()) {
+                    $(".ticketAnimationLeft, .ticketAnimationRight").css("transform", "rotate(45deg) translate(0, 0)")
+                    setTimeout(() => {
+                        $(".ticketDisplay").css("display", "flex")
+                    }, 1000)
+                    setTimeout(() => {
+                        sessionStorage.setItem("isTicketsSubmit", "true")
+                        $("form").submit()
+                    }, 1500)
+                } else {
+                    $("input[name='veri']").removeClass("border border-danger")
+                    $("form").addClass("was-validated")
+                }
+            } else {
+                $("#alert").append('<div class="alert alert-danger alert-dismissible border border-danger fade show text-center text-danger" style="width: 15vw;">' +
+                    '<span>驗證碼錯誤，請重新輸入</span>' +
+                    '<button type="button" class="close" data-dismiss="alert">' +
+                    '<span>&times;</span>' +
+                    '</button>' +
+                    '</div>')
+                $("form").addClass("was-validated")
+                $("input[name='veri']").addClass("border border-danger")
+                $("form").addClass("shake")
+                setTimeout(() => {
+                    $("form").removeClass("shake")
+                }, 300)
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

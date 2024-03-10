@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="shortcut icon" href="./img/FIBEX_logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="./bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <div class="ticketDisplay text-success">
+        <h1 class="display-1" style="font-weight: 900;">資料送出中...</h1>
+    </div>
+    <div class="ticketAnimationLeft"></div>
+    <div class="ticketAnimationRight"></div>
+
+    <svg class="fixedTop" width="650" height="400">
+        <polygon points="0,0 650,0 650,400 550,100" style="fill:#4a6783;"></polygon>
+    </svg>
+    <svg class="fixedBottom" width="650" height="400">
+        <polygon points="0,0 0,400 650,400 100,300" style="fill:#4a6783;"></polygon>
+    </svg>
+
+    <!-- navbar -->
+
+    <nav class="container">
+        <img src="./img/FIBEX_logo.png" style="height: 4vh; margin: 2vh 2vw; transform: scale(2);" alt="logo">
+        <a href="./home.html" class="nowNav">Home</a>
+        <a href="./news.html">News</a>
+        <a href="./business.html">Business</a>
+        <a href="./tickets.html">Tickets</a>
+        <a href="./tablesheet.php">TableSheet</a>
+    </nav>
+
+    <!-- imformation-->
+
+    <section class="container text-center mt-4" style="color: #4a6783; width: 25vw;">
+        <h2 class="display-1" style="font-weight: 900; border-style: solid hidden;">活動資訊</h2>
+        <p style="font-weight: 700;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ullam ex quo magni
+            doloremque facere eos maiores placeat aperiam fugit cum aliquam sunt quos, quidem dolorum! Quibusdam aliquid
+            deserunt hic?</p>
+    </section>
+
+    <!-- carousel -->
+
+    <main>
+
+        <div id="slider" class="slide carousel m-auto shadow" data-ride="carousel"
+            style="width: 50vw; height: 50vh; border: 2px solid #333;">
+
+            <ol class="carousel-indicators mb-1">
+                <li data-target="#slider" data-slide-to="0" class="active"
+                    style="border-radius: 50%; width: 1em; height: 1em;"></li>
+                <li data-target="#slider" data-slide-to="1" style="border-radius: 50%; width: 1em; height: 1em;"></li>
+                <li data-target="#slider" data-slide-to="2" style="border-radius: 50%; width: 1em; height: 1em;"></li>
+            </ol>
+
+            <div class="carousel-inner h-100 bg-dark">
+
+                <div class="carousel-item h-100 active">
+                    <img src="./img/Carousel1.jpg" alt="Carousel1" class="w-100 h-100">
+                    <div class="carousel-caption w-100 cardBg p-4" style="position: absolute; bottom: 0; left: 0;">
+                        <h2 style="font-weight: 800;">title1</h2>
+                        <p style="font-weight: 600;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem
+                            exercitationem ex amet corporis repellendus maiores optio reprehenderit provident quaerat
+                            eum tenetur suscipit, officia, quos facere beatae? Cum molestias libero ut?</p>
+                    </div>
+                </div>
+
+                <div class="carousel-item h-100">
+                    <img src="./img/Carousel2.jpg" alt="Carousel2" class="w-100 h-100">
+                    <div class="carousel-caption w-100 cardBg p-4" style="position: absolute; bottom: 0; left: 0;">
+                        <h2 style="font-weight: 800;">title2</h2>
+                        <p style="font-weight: 600;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat
+                            aliquam nesciunt nihil cumque repellendus veniam repudiandae adipisci doloribus, incidunt
+                            obcaecati quis ab sapiente, eius neque minima dolorem voluptate corrupti voluptas.</p>
+                    </div>
+                </div>
+
+                <div class="carousel-item h-100">
+                    <img src="./img/Carousel3.jpg" alt="Carousel3" class="w-100 h-100">
+                    <div class="carousel-caption w-100 cardBg p-4" style="position: absolute; bottom: 0; left: 0;">
+                        <h2 style="font-weight: 800;">title3</h2>
+                        <p style="font-weight: 600;">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                            Repudiandae, corporis velit voluptas mollitia quidem praesentium nobis sequi, officiis,
+                            doloremque repellat culpa vitae optio. Porro optio, earum ut molestias magni ex?</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="carousel-control-prev" data-target="#slider" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" data-target="#slider" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+
+        </div>
+
+    </main>
+
+    <!-- footer -->
+
+    <footer class="text-center text-white p-2" style="background-color: #4a6783;">
+        <img src="./img/facebook.png" style="height: 40px;" alt="facebook">
+        <span>Copyright &copy; 2024 FIBEX All Rights Reserved</span>
+        <img src="./img/google.png" style="height: 40px;" alt="google">
+    </footer>
+
+    <!-- script -->
+
+    <script src="./jquery/jquery.js"></script>
+    <script src="./bootstrap/bootstrap.js"></script>
+    <script>
+
+        $("a[href='./home.html']").hover(
+            function () {
+                $(this).css("animation-name", "lnowNav")
+            },
+            function () {
+                $(this).css("animation-name", "nowNav")
+            }
+        )
+
+        $(".carousel").carousel({ interval: 3000 })
+
+        if (sessionStorage.getItem("isTicketsSubmit") == "true") {
+            $(".ticketDisplay").css("display", "flex")
+            $(".ticketAnimationLeft").css("transform", "rotate(45deg) translate(0, 0)")
+            $(".ticketAnimationRight").css("transform", "rotate(45deg) translate(0, 0)")
+            setTimeout(() => {
+                $(".ticketDisplay").fadeOut(100)
+                $(".ticketAnimationLeft").css("transform", "rotate(45deg) translate(-100%, 100%)")
+                $(".ticketAnimationRight").css("transform", "rotate(45deg) translate(100%, -100%)")
+            }, 100)
+            sessionStorage.setItem("isTicketsSubmit", "false")
+        } else {
+            sessionStorage.setItem("isTicketsSubmit", "false")
+        }
+
+    </script>
+
+</body>
+
+</html>

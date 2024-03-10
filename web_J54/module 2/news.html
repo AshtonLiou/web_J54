@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+    <link rel="shortcut icon" href="./img/FIBEX_logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="./bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <svg class="fixedBottom" height="400" width="650">
+        <polygon points="0,0 0,400 650,400 100,300" style="fill:#4a6783;"></polygon>
+    </svg>
+    <svg class="fixedTop" height="400" width="650">
+        <polygon points="0,0 650,0 650,400 550,100" style="fill:#4a6783;"></polygon>
+    </svg>
+
+    <!-- navbar -->
+
+    <nav class="container">
+        <img src="./img/FIBEX_logo.png" style="height: 4vh; margin: 2vh 2vw; transform: scale(2);" alt="logo">
+        <a href="./home.html">Home</a>
+        <a href="./news.html" class="nowNav">News</a>
+        <a href="./business.html">Business</a>
+        <a href="./tickets.html">Tickets</a>
+        <a href="./tablesheet.php">TableSheet</a>
+    </nav>
+
+    <!-- map -->
+
+    <main>
+
+        <div class="container-fluid mapContainer shadow bg-dark">
+
+            <div class="row m-0">
+
+                <div class="col d-flex p-0">
+                    <img src="./img/Map.jpg" alt="Map" class="w-50 border-right border-dark">
+                    <img id="mapImg" src="./img/News1.jpg" alt="mapImg" class="w-50 border-left border-dark">
+                    <div class="cardBg w-50 p-4"
+                        style="position: absolute; bottom: 0; right: 0; border-radius: 50px 0 0 0;">
+                        <h2 id="mapTitle" style="font-weight: 800;">title1</h2>
+                        <P id="mapParagraph" style="font-weight: 600;">Lorem ipsum dolor sit amet consecteturadipisicing
+                            elit. Vel in nobis dolore quia corrupti, possimus corporis, facilis quasi vero culpa natus
+                            deleniti voluptate iure sequi nihil! Ex sint velit autem.</P>
+                    </div>
+                </div>
+
+                <div class="mapIcon" id="icon1"></div>
+                <div class="mapIcon" id="icon2"></div>
+                <div class="mapIcon" id="icon3"></div>
+                <div class="mapIcon" id="icon4"></div>
+                <div class="mapIcon" id="icon5"></div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- footer -->
+
+    <footer class="text-center text-white p-2" style="background-color: #4a6783;">
+        <img src="./img/facebook.png" style="height: 40px;" alt="facebook">
+        <span>Copyright &copy; 2024 FIBEX All Rights Reserved</span>
+        <img src="./img/google.png" style="height: 40px;" alt="google">
+    </footer>
+
+    <!-- script -->
+
+    <script src="./jquery/jquery.js"></script>
+    <script src="./bootstrap/bootstrap.js"></script>
+    <script>
+
+        $("a[href='./news.html']").hover(
+            function () {
+                $(this).css("animation-name", "lnowNav")
+            },
+            function () {
+                $(this).css("animation-name", "nowNav")
+            }
+        )
+
+        $.each({
+            "icon1": {
+                src: "./img/News1.jpg",
+                title: "title1",
+                text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel in nobis dolore quia corrupti, possimus corporis, facilis quasi vero culpa natus deleniti voluptate iure sequi nihil! Ex sint velit autem."
+            },
+            "icon2": {
+                src: "./img/News2.jpg",
+                title: "title2",
+                text: "Lorem ipsum dolor, sit amet con sectetur adipisicing elit. Vitae est et, at autem iste reprehenderit exercitationem doloribus corporis enim voluptates, provident laboriosam debitis tempora officiis commodi! Corrupti amet doloribus ducimus."
+            },
+            "icon3": {
+                src: "./img/News3.jpg",
+                title: "title3",
+                text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, illum aliquid a provident omnis dicta et voluptatem fuga iure consequatur enim commodi quod alias ipsam, veritatis dolor dolores deleniti repudiandae?"
+            },
+            "icon4": {
+                src: "./img/News4.jpg",
+                title: "title4",
+                text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo ipsa corrupti tenetur animi, vel culpa! Iure at tenetur aspernatur aliquid vel optio, ipsa reiciendis voluptatibus facilis praesentium qui, repudiandae laudantium."
+            },
+            "icon5": {
+                src: "./img/News5.jpg",
+                title: "title5",
+                text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, sint soluta? Id consectetur, quia qui harum quas aspernatur iusto, voluptatibus labore numquam consequatur earum, sit saepe et voluptate enim eius."
+            }
+        }, (id, info) => {
+            let canClick = true
+            $("#" + id).click(() => {
+                if (canClick) {
+                    canClick = false
+
+                    $("#mapImg, #mapTitle, #mapParagraph").fadeOut(150, function () {
+                        $("#mapImg").attr("src", info.src)
+                        $("#mapTitle").text(info.title)
+                        $("#mapParagraph").text(info.text)
+                        $(this).fadeIn(100)
+                    })
+
+                    setTimeout(() => {
+                        canClick = true
+                    }, 2000)
+                }
+            })
+        })
+
+    </script>
+
+</body>
+
+</html>
